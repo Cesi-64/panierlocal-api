@@ -1,0 +1,29 @@
+# Deux profils qui lancent LA MÊME image (variable IMAGE) avec une configuration différente.
+# Exemples :
+#   IMAGE=ghcr.io/<org>/panierlocal-api@sha256:... docker compose --profile preprod up -d
+#   IMAGE=ghcr.io/<org>/panierlocal-api@sha256:... docker compose --profile prod up -d
+services:
+  api-preprod:
+    profiles: ["preprod"]
+    image: ${IMAGE:-panierlocal-api:local}
+    container_name: panierlocal-preprod
+    environment:
+      APP_ENV: preprod
+      APP_VERSION: ${APP_VERSION:-local}
+      LOG_LEVEL: debug
+    ports:
+      - "8081:3000"
+    restart: unless-stopped
+
+  api-prod:
+    profiles: ["prod"]
+    image: ${IMAGE:-panierlocal-api:local}
+    container_name: panierlocal-prod
+    environment:
+      APP_ENV: prod
+      APP_VERSION: ${APP_VERSION:-local}
+      LOG_LEVEL: warn
+    ports:
+      - "8080:3000"
+    read_only: true
+    restart: unless-stopped

@@ -1,0 +1,24 @@
+{
+  "name": "panierlocal-api",
+  "version": "1.0.0",
+  "description": "Mini-API catalogue de paniers PanierLocal - support du mini-projet DevSecOps",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "jest --ci --coverage"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
